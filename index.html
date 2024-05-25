@@ -46,6 +46,10 @@
         button:hover {
             background-color: #45a049;
         }
+        button.copy {
+            background-color: #f44336; /* Red color */
+            margin-top: 10px;
+        }
         p {
             margin-top: 20px;
             word-wrap: break-word;
@@ -59,7 +63,7 @@
         <br>
         <button onclick="extractOriginalUrl()">Go</button>
         <p id="originalUrl"></p>
-        <button id="copyButton" onclick="copyUrl()" style="display: none;">Copy</button>
+        <button id="copyButton" class="copy" onclick="copyUrl()" style="display: none;">Copy</button>
     </div>
 
     <script>
