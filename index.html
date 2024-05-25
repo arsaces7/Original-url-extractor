@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Original URL Extractor</title>
+    <link rel="manifest" href="/manifest.json">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -74,11 +75,21 @@
     </div>
 
     <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('/sw.js').then(function(registration) {
+                    console.log('ServiceWorker registration successful with scope: ', registration.scope);
+                }, function(err) {
+                    console.log('ServiceWorker registration failed: ', err);
+                });
+            });
+        }
+
         function extractOriginalUrl() {
             var googleUrl = document.getElementById('googleUrl').value;
             var params = new URLSearchParams(googleUrl);
             var originalUrl = params.get('url');
-            
+
             if (originalUrl) {
                 document.getElementById('originalUrl').textContent = originalUrl;
                 document.getElementById('copyButton').style.display = 'inline-block';
