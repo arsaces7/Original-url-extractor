@@ -57,6 +57,9 @@
             margin-top: 20px;
             word-wrap: break-word;
         }
+        .error {
+            color: #f44336;
+        }
     </style>
 </head>
 <body>
@@ -67,6 +70,7 @@
         <button onclick="extractOriginalUrl()">Go</button>
         <p id="originalUrl"></p>
         <button id="copyButton" class="copy" onclick="copyUrl()" style="display: none;">Copy</button>
+        <p id="errorMessage" class="error" style="display: none;">Error: Unable to detect URL from the link</p>
     </div>
 
     <script>
@@ -74,8 +78,16 @@
             var googleUrl = document.getElementById('googleUrl').value;
             var params = new URLSearchParams(googleUrl);
             var originalUrl = params.get('url');
-            document.getElementById('originalUrl').textContent = originalUrl;
-            document.getElementById('copyButton').style.display = 'inline-block';
+            
+            if (originalUrl) {
+                document.getElementById('originalUrl').textContent = originalUrl;
+                document.getElementById('copyButton').style.display = 'inline-block';
+                document.getElementById('errorMessage').style.display = 'none';
+            } else {
+                document.getElementById('originalUrl').textContent = '';
+                document.getElementById('copyButton').style.display = 'none';
+                document.getElementById('errorMessage').style.display = 'block';
+            }
         }
 
         function copyUrl() {
