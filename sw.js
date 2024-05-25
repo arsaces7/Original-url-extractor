@@ -1,4 +1,3 @@
-// sw.js
 self.addEventListener('install', function(event) {
   event.waitUntil(
     caches.open('v1').then(function(cache) {
@@ -6,7 +5,9 @@ self.addEventListener('install', function(event) {
         '/',
         '/index.html',
         '/manifest.json',
-        '/icon.png'
+        '/sw.js',
+        '/icon.png',
+        '/icon-512.png'
       ]);
     })
   );
