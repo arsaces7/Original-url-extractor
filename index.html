@@ -59,6 +59,7 @@
         <br>
         <button onclick="extractOriginalUrl()">Go</button>
         <p id="originalUrl"></p>
+        <button id="copyButton" onclick="copyUrl()" style="display: none;">Copy</button>
     </div>
 
     <script>
@@ -67,6 +68,18 @@
             var params = new URLSearchParams(googleUrl);
             var originalUrl = params.get('url');
             document.getElementById('originalUrl').textContent = originalUrl;
+            document.getElementById('copyButton').style.display = 'inline-block';
+        }
+
+        function copyUrl() {
+            var originalUrl = document.getElementById('originalUrl').textContent;
+            var tempInput = document.createElement("input");
+            tempInput.value = originalUrl;
+            document.body.appendChild(tempInput);
+            tempInput.select();
+            document.execCommand("copy");
+            document.body.removeChild(tempInput);
+            alert("Copied the URL: " + originalUrl);
         }
     </script>
 </body>
